@@ -1,0 +1,138 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+/* navbar */
+nav.navbar .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.panel-heading .accordion-toggle:after {
+  font-family: "Glyphicons Halflings";
+  content: "\e114";
+  float: right;
+  color: grey;
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+  content: "\e080";
+}
+
+.tooltip-inner {
+  max-width: 350px;
+  width: 350px;
+}
+
+h1 {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #A00000;
+}
+
+#tablelibgen td {
+  font-family: "Pt Sans", Tahoma, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0em 3px;
+  font-size: 1rem;
+}
+
+#tablelibgen1 td {
+  font-family: "Pt Sans", Tahoma, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0em 3px;
+  font-size: 1rem;
+}
+
+.taghide {
+  display: none;
+}
+
+.taghide+label~div {
+  display: none;
+}
+
+.taghide+label {
+  display: inline-block;
+}
+
+.taghide:checked+label+div {
+  display: block;
+}
+
+/**/
+#topic, #object, #column {
+  margin-bottom: 20px;
+}
+
+#topic .form-check, #object .form-check, #column .form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#topic .form-check-label, #object .form-check-label, #column .form-check-label {
+  margin-left: 5px;
+}
+
+#topic strong, #object strong, #column strong {
+  display: block;
+  text-align: start;
+  margin-bottom: 10px;
+}
