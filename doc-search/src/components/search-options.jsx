@@ -7,31 +7,19 @@ const Search_Options = () => {
                         <strong className="d-block text-start">Search in fields:</strong>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="colt" name="columns[]" value="t" defaultChecked />
-                            <label className="form-check-label" htmlFor="colt">Title</label>
+                            <label className="form-check-label" htmlFor="colt">Nhân sự</label>
                         </div>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="cola" name="columns[]" value="a" defaultChecked />
-                            <label className="form-check-label" htmlFor="cola">Author(s)</label>
+                            <label className="form-check-label" htmlFor="cola">Cơ sở vật chất</label>
                         </div>
                         <div className="form-check">
                             <input type="checkbox" className="form-check-input" id="cols" name="columns[]" value="s" defaultChecked />
-                            <label className="form-check-label" htmlFor="cols">Series</label>
-                        </div>
-                        <div className="form-check">
-                            <input type="checkbox" className="form-check-input" id="coly" name="columns[]" value="y" defaultChecked />
-                            <label className="form-check-label" htmlFor="coly">Year</label>
-                        </div>
-                        <div className="form-check">
-                            <input type="checkbox" className="form-check-input" id="colp" name="columns[]" value="p" defaultChecked />
-                            <label className="form-check-label" htmlFor="colp">Publisher</label>
-                        </div>
-                        <div className="form-check">
-                            <input type="checkbox" className="form-check-input" id="coli" name="columns[]" value="i" defaultChecked />
-                            <label className="form-check-label" htmlFor="coli">ISBN</label>
+                            <label className="form-check-label" htmlFor="cols">Tài chính</label>
                         </div>
                     </div>
                 </div>
-                <div className="col-4">
+                {/* <div className="col-4">
                     <div className="d-block" id="column">
                         <strong className="d-block text-start">Search in topics:</strong>
                         <div className="form-check">
@@ -92,14 +80,14 @@ const Search_Options = () => {
                             <label className="form-check-label" htmlFor="objw">Works</label>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div>
                 <div className="row">
                     <strong>Results per page:</strong>
 
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="res25" name="res" class="custom-control-input" value="25" />
+                        <input type="radio" id="res25" name="res" class="custom-control-input" value="25" defaultChecked='true'/>
                         <label class="custom-control-label" for="res25">25</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
