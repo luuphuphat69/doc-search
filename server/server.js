@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const sql = require("mssql");
 const searchRoute = require('./router/search_router');
-const PORT = 8080;
+const PORT = 2000;
 
 dotenv.config();
 app.use(bodyParser.json({ limit: "50mb" }));
