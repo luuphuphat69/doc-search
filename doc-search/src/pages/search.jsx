@@ -24,6 +24,7 @@ const Search = () => {
     return (
         <div style={{ position: 'absolute', top: '0px', left: '0px', right: '0px' }}>
             <NavBar />
+            <div className="if"><h1 className="ifr">Information Retrieval</h1></div>
             <form onSubmit={handleSearch} className="input-group mb-3">
                 <input
                     autoFocus

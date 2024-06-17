@@ -67,3 +67,75 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.if{
+ margin: 100px;
+
+}
+.ifr{
+  color: #6C757D;
+}
+.ifr:hover{
+  opacity: 0.7;
+  cursor: pointer;
+}
+.container-fluid{
+  display: flex;
+}
+.row{
+  flex: 1 ;
+  
+}
+.d-block{
+  display: inline-block;
+  font-size: 20px;
+}
+.col-4{
+  display: inline-block;
+}
+.row .form-check{
+  margin-left: 10px;
+}
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 15px; /* Adjust spacing between checkboxes as needed */
+}
+
+.form-check-label {
+  margin-left: 5px; /* Space between checkbox and label */
+}
+
+#topic {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.container-fluid .row .results{
+  margin-left: 10px;
+}
+
+.form-check, .custom-control.custom-radio.custom-control-inline {
+    display: flex;
+    align-items: center;
+    margin-right: 15px; 
+    font-size: 20px; 
+    margin-left: 10px;
+    
+}
+
+.form-check-label, .custom-control-label {
+    font-size: 20px;
+    margin-left: 5px; 
+}
+
+.form-check-input, .custom-control-input {
+    width: 20px; 
+    height: 20px;
+    margin-right: 10px;
+}
+.results{
+  font-size: 20px;
+}
+.row{
+  margin-top: 10px;
+}
