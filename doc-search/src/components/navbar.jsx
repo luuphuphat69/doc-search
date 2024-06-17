@@ -13,8 +13,8 @@ const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-secondary mb-4">
-            <a className="navbar-brand" href="/index.php">
-                <img src="../src/assets/react.svg" height="30" alt="" />
+            <a className="navbar-brand" href="">
+                <img src="../src/assets/images1.png" height="30" alt="" />
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
