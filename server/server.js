@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const sql = require("mssql");
 const searchRoute = require('./router/search_router');
 const PORT = 2000;
+const dbconfig = require('./dbconfig');
 
 dotenv.config();
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -20,29 +21,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const dbconfig = {
-
-   user: 'phat',
-   password: '123123',
-   server: 'localhost',
-   database: 'EREL_server',
-   port:1433,
-   options: {
-       trustedconnection: true,
-       enableArithAbort: true,
-       instancename: 'MSI',
-       encrypt: true,
-       trustServerCertificate: true,
-   }
-};
-
 app.use('/v1', searchRoute);
 
 app.listen(PORT, () => {
    console.log("Server is running at port " + PORT);
 });
-
-
 
 async function connectToDatabase() {
    try {
@@ -53,18 +36,4 @@ async function connectToDatabase() {
    }
 }
 
-async function queryDatabase() {
-   try {
-       const pool = await sql.connect(dbconfig);
-       const result = await pool.request()
-           .query('SELECT * FROM Document');
-       console.log(result);
-   } catch (err) {
-       console.error('SQL error: ', err);
-   } finally {
-       sql.close();
-   }
-}
-
 connectToDatabase();
-queryDatabase();

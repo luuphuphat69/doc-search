@@ -3,13 +3,14 @@ import React, { useEffect } from 'react';
 const NavBar = () => {
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = "../src/assets/js/dark-mode-switch.js"; // Adjust the path as needed
+        script.src = "../src/assets/js/dark-mode-switch.js"; 
         script.async = true;
         document.body.appendChild(script);
         return () => {
             document.body.removeChild(script);
         };
     }, []);
+
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-secondary mb-4">
             <a className="navbar-brand" href="/index.php">

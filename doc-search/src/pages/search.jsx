@@ -11,11 +11,11 @@ const Search = () => {
     const handleSearch = async (e) => {
         e.preventDefault(); // Prevent the default form submission behavior
         try {
-            const response = await axios.get(`http://localhost:8080/v1/search?queries=${searchTerm}`);
+            const response = await axios.get(`http://localhost:2000/v1/search?queries=${searchTerm}`);
             console.log(response.data);
-            // navigate('/search', {  state: {
-            //     searchResults: response.data,
-            // }, });
+            navigate('/result', {  state: {
+                searchResults: response.data,
+            }, });
         } catch (error) {
             console.error(error);
         }
