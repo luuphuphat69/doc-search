@@ -6,8 +6,9 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const sql = require("mssql");
 const searchRoute = require('./router/search_router');
+const resultRoute = require('./router/result_router');
 const PORT = 2000;
-const dbconfig = require('./dbconfig');
+const dbconfig = require('./usage/dbconfig');
 
 dotenv.config();
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -22,18 +23,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/v1', searchRoute);
+app.use('/v1', resultRoute);
 
 app.listen(PORT, () => {
    console.log("Server is running at port " + PORT);
 });
 
-async function connectToDatabase() {
-   try {
-       await sql.connect(dbconfig);
-       console.log('Connected to the database successfully');
-   } catch (err) {
-       console.error('Database connection failed: ', err);
-   }
-}
+// async function connectToDatabase() {
+//    try {
+//        await sql.connect(dbconfig);
+//        console.log('Connected to the database successfully');
+//    } catch (err) {
+//        console.error('Database connection failed: ', err);
+//    }
+// }
 
-connectToDatabase();
+// connectToDatabase();

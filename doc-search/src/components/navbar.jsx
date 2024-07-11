@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 const NavBar = () => {
     useEffect(() => {
         const script = document.createElement('script');
@@ -13,18 +13,15 @@ const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-secondary mb-4">
-            <a className="navbar-brand" href="">
+            <Link className="navbar-brand" to = "/search">
                 <img src="../src/assets/images1.png" height="30" alt="" />
-            </a>
+            </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">NEWS <span className="sr-only">(current)</span></a>
-                    </li>
                     <li className="nav-item dropdown">
                         <a className="btn btn-secondary dropdown-toggle" href="#" role="button"
                             id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">

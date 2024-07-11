@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/navbar";
 import axios from 'axios';
-import Search_Options from "../components/search-options";
 
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
     const handleSearch = async (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
         try {
             const response = await axios.get(`http://localhost:2000/v1/search?queries=${searchTerm}`);
-            console.log(response.data);
-            navigate('/result', {  state: {
-                searchResults: response.data,
-            }, });
+            navigate("/result", {state:{searchResults: response.data}});
         } catch (error) {
-            console.error(error);
+            console.error("Error during search:", error);
         }
     }
+    
 
     return (
         <div style={{ position: 'absolute', top: '0px', left: '0px', right: '0px' }}>
@@ -45,9 +42,6 @@ const Search = () => {
                 </div>
                 <div className="invalid-feedback">Input value</div>
             </form>
-            <div>
-                <Search_Options />
-            </div>
         </div>
     );
 }
