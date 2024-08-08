@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import NavBar from "../components/navbar";
 import axios from 'axios';
 
@@ -10,18 +10,19 @@ const Search = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
+            // Perform the search operation
             const response = await axios.get(`http://localhost:2000/v1/search?queries=${searchTerm}`);
-            navigate("/result", {state:{searchResults: response.data}});
+            // Navigate to results page
+            navigate("/result", { state: { responseData: response.data } });
         } catch (error) {
             console.error("Error during search:", error);
         }
     }
-    
 
     return (
         <div style={{ position: 'absolute', top: '0px', left: '0px', right: '0px' }}>
             <NavBar />
-            <div className="if"><h1 className="ifr">Information Retrieval</h1></div>
+            <div className="if"><Link className="ifr" to="/search"><h1>Information Retrieval</h1></Link></div>
             <form onSubmit={handleSearch} className="input-group mb-3">
                 <input
                     autoFocus

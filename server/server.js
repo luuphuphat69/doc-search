@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const sql = require("mssql");
 const searchRoute = require('./router/search_router');
 const resultRoute = require('./router/result_router');
+const usageRoute = require('./router/usage_router');
 const PORT = 2000;
 const dbconfig = require('./usage/dbconfig');
 
@@ -24,6 +25,7 @@ app.use(cors(corsOptions));
 
 app.use('/v1', searchRoute);
 app.use('/v1', resultRoute);
+app.use('/v1/usage', usageRoute);
 
 app.listen(PORT, () => {
    console.log("Server is running at port " + PORT);
