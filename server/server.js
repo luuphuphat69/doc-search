@@ -56,14 +56,18 @@ app.listen(PORT, () => {
   console.log("Server is running at port " + PORT);
 });
 
-// Task completion endpoint
 app.post('/taskcomplete', async (req, res) => {
-   console.log('Task completed notification received.');
+  try {
+    console.log('Task completed notification received.');
 
-   const listDE = await getlistDE();
-   const efidf = calEFIDF(listDE);
-   await updateEFIDFToDB(efidf);
+    const listDE = await getlistDE();
+    const efidf = calEFIDF(listDE);
+    await updateEFIDFToDB(efidf);
 
-   res.status(200).send('Notification received');
- });
- 
+    res.status(200).send('Notification received and updated successfully');
+  } catch (error) {
+    console.error('Error updating EFIDF:', error);
+
+    res.status(500).send('An error occurred while processing the request');
+  }
+});
