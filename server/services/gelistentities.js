@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const url = 'http://huflitwebservices.somee.com/WebService1.asmx?wsdl';
 // const url = 'https://localhost:44324/WebService1.asmx?wsdl';
 
-const getlistdoc = () => {
+const getlistentities = () => {
     return new Promise((resolve, reject) => {
         const options = {
             wsdl_options: {
@@ -21,19 +21,18 @@ const getlistdoc = () => {
             if (err) {
                 return reject(err);
             }
-            client.GetListDocument((err, result) => {
+            client.GetListEntities((err, result) => {
                 if (err) {
                     return reject(err);
-                }
+                } 
                 try {
-                    const parsedResult = JSON.parse(result.GetListDocumentResult);
-                    resolve(parsedResult);
-                } catch (parseErr) {
-                    reject(parseErr);
+                    resolve(result);
+                } catch (err) {
+                    reject(err);
                 }
             });
         });
     });
 };
 
-module.exports = getlistdoc;
+module.exports = getlistentities;

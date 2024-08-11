@@ -64,10 +64,10 @@ app.post('/taskcomplete', async (req, res) => {
     const efidf = calEFIDF(listDE);
     await updateEFIDFToDB(efidf);
 
-    res.status(200).send('Notification received and updated successfully');
+    return res.status(200).send('Notification received and updated successfully');
   } catch (error) {
     console.error('Error updating EFIDF:', error);
 
-    res.status(500).send('An error occurred while processing the request');
+    return res.status(500).send('An error occurred while processing the request');
   }
 });

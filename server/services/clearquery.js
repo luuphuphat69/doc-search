@@ -7,7 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const url = 'http://huflitwebservices.somee.com/WebService1.asmx?wsdl';
 // const url = 'https://localhost:44324/WebService1.asmx?wsdl';
 
-const clearlistdoc= () => {
+const clearQuery= () => {
     const options = {
         wsdl_options: {
             agent: new https.Agent({
@@ -20,7 +20,7 @@ const clearlistdoc= () => {
         if (err) {
             console.log(err);
         } else {
-            client.ClearListDocument((err) => {
+            client.ClearQuery((err) => {
                 if (err) {
                     console.log(err);
                 }
@@ -29,4 +29,4 @@ const clearlistdoc= () => {
     });
 };
 
-module.exports = clearlistdoc;
+module.exports = clearQuery;

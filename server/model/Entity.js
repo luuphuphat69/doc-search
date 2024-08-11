@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const entitySchema = new mongoose.Schema({
     EntityID: {
-        type: Number,
+        type: mongoose.Schema.Types.Long,
         require: true,
     },
     MentionName:{

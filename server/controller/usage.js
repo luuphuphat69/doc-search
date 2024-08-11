@@ -1,4 +1,4 @@
-const clearlistdoc = require('../usage/clearlistdoc');
+const clearlistdoc = require('../services/clearlistentities');
 const usageController = {
     clearlist: async (req, res) => {
         try {

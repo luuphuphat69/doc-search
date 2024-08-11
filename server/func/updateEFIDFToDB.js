@@ -1,17 +1,29 @@
+const mongoose = require('mongoose');
+const BSON = require('bson');
 const DE = require('../model/DE');
 
 const updateEFIDFToDB = async (listDE) => {
     try {
-        // Iterate through each document entity and update the EF-IDF in the database
         for (const entity of listDE) {
-            // Use the updateOne method to update the document matching EntityID and DocID
-            await DE.updateOne(
-                { EntityID: entity.EntityID, DocID: entity.DocID },
-                { $set: { ef_idf: entity.EF_IDF } }
-            );
+            try {
+                const entityID = new BSON.Long(entity.EntityID);
+                const docID = new BSON.Int32(entity.DocID);
+
+                const updateResult = await DE.updateOne(
+                    { EntityID: entityID, DocID: docID },
+                    { $set: { ef_idf: entity.EF_IDF } },
+                    { upsert: false } // Set to true if you want to insert if not found
+                );
+                if (updateResult.matchedCount === 0) {
+                    console.log(`Not found: EntityID ${entity.EntityID}, DocID ${entity.DocID}`);
+                }
+            } catch (error) {
+                console.error(`Error updating EntityID: ${entity.EntityID}, DocID: ${entity.DocID}:`, error);
+            }
         }
     } catch (error) {
-        console.error('Error updating EF-IDF values in the database:', error);
+        console.error('Error in updateEFIDFToDB function:', error);
     }
 };
+
 module.exports = updateEFIDFToDB;
