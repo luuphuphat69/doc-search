@@ -20,9 +20,11 @@ const clearQuery= () => {
         if (err) {
             console.log(err);
         } else {
-            client.ClearQuery((err) => {
+            client.ClearQuery((err, result) => {
                 if (err) {
                     console.log(err);
+                }else{
+                    console.log("Clear query");
                 }
             });
         }

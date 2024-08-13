@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -15,12 +15,7 @@ const Result = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [data, setData] = useState([]);
-    const [contentData, setContentData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
-    const { responseData } = location.state || { responseData: { data: [] } };
-    const prevUniqueDataRef = useRef([]);
-    const preDataRef = useRef([]);
 
     const columns = [
         { id: 'id', label: 'ID', minWidth: 170 },
@@ -28,75 +23,28 @@ const Result = () => {
     ];
 
     useEffect(() => {
-        const fetchContentData = async () => {
+        const fetchData = async () => {
             try {
                 const response = await fetch('http://localhost:2000/v1/result');
                 const data = await response.json();
-                setContentData(data); // Ensure contentData is set correctly
+                setData(data.map(createData)); // Directly map the data here
+                setLoading(false); // Set loading to false after data is set
             } catch (error) {
                 console.error("Error fetching content data:", error);
+                setLoading(false); // Also set loading to false if there is an error
             }
         };
 
-        fetchContentData();
-    }, [contentData]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Check if contentData is an array
-                const fetchedContentData = Array.isArray(contentData) ? contentData : [];
-
-                // Combine contentData with responseData
-                const validResponseData = Array.isArray(responseData.data)
-                    ? responseData.data.flatMap(item => item.docs || [])
-                    : [];
-
-                // Combine the two datasets
-                const combinedData = [...validResponseData, ...fetchedContentData];
-
-                // Deduplicate based on ID
-                const uniqueData = Array.from(
-                    new Map(combinedData.map(doc => [String(doc.Id), doc])).values()
-                );
-
-                // Compare with previous unique data
-                const prevUniqueData = prevUniqueDataRef.current;
-                if (!areArraysEqual(prevUniqueData, uniqueData)) {
-                    setData(uniqueData.map(record => createData(record)));
-                    prevUniqueDataRef.current = uniqueData;
-                }
-            } catch (error) {
-                console.error("Error fetching initial data:", error);
-            }
-        };
         fetchData();
-    }, [responseData, contentData]);
-
-    useEffect(() => {
-            const prevData = preDataRef.current;
-            if (!areArraysEqual(prevData, data)) {
-                setLoading(false);
-            } else {
-                setLoading(true);
-            }
-            preDataRef.current = data; // Update reference to current data
-        
-    }, [data]);
+    }, []); // Remove `data` dependency to prevent infinite fetch loop
 
     function createData(record) {
         return {
-            id: record.Id || record.id,
-            title: record.DocName || record.title,
-            path: record.Path || record.path
+            id: record.DocID || record.Id,
+            title: record.Title || record.DocName,
+            path: record.Path
         };
     }
-
-    // Function to check if two arrays are equal
-    const areArraysEqual = (array1, array2) => {
-        if (array1.length !== array2.length) return false;
-        return array1.every((item, index) => JSON.stringify(item) === JSON.stringify(array2[index]));
-    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

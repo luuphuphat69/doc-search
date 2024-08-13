@@ -6,7 +6,7 @@ const deSchema = new mongoose.Schema({
         require: true,
     },
     DocID: {
-        type: Array,
+        type: Number,
         require: true,
     },
     entity_count:{

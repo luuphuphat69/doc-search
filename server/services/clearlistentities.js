@@ -20,9 +20,11 @@ const clearlistentities= () => {
         if (err) {
             console.log(err);
         } else {
-            client.ClearListEntities((err) => {
+            client.ClearListEntities((err,result) => {
                 if (err) {
                     console.log(err);
+                }else{
+                    console.log("Clear list entities");
                 }
             });
         }
