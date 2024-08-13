@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -27,16 +27,16 @@ const Result = () => {
             try {
                 const response = await fetch('http://localhost:2000/v1/result');
                 const data = await response.json();
-                setData(data.map(createData)); // Directly map the data here
+                setData(data.map(createData));
                 setLoading(false); // Set loading to false after data is set
             } catch (error) {
                 console.error("Error fetching content data:", error);
-                setLoading(false); // Also set loading to false if there is an error
+                setLoading(false); // Set loading to false if there is an error
             }
         };
 
         fetchData();
-    }, []); // Remove `data` dependency to prevent infinite fetch loop
+    }, []);
 
     function createData(record) {
         return {

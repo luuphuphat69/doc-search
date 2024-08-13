@@ -26,6 +26,7 @@ const resultController = {
 
                         // Use the EntityID to find document IDs in the DE collection
                         const deRecords = await DE.find({ EntityID: entityId }).sort({ ef_idf: -1 });
+                        
                         // Retrieve the documents from the Documents collection
                         for (const deRecord of deRecords) {
                             const document = await Document.findOne({ DocID: deRecord.DocID });
