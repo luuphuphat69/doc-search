@@ -11,7 +11,7 @@ const Search = () => {
         e.preventDefault();
         try {
             // Perform the search operation
-            await axios.get(`http://localhost:2000/v1/search?queries=${searchTerm}`);
+            await axios.get(`http://3.81.8.209:2000/v1/search?queries=${searchTerm}`);
             // Navigate to results page
             navigate("/result");
         } catch (error) {

@@ -25,7 +25,7 @@ const Result = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:2000/v1/result');
+                const response = await fetch('http://3.81.8.209:2000/v1/result');
                 const data = await response.json();
                 setData(data.map(createData));
                 setLoading(false); // Set loading to false after data is set
