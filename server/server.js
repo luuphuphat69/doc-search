@@ -15,7 +15,7 @@ const updateEFIDFToDB = require('./func/updateEFIDFToDB');
 dotenv.config();
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["http://localhost:5173", "http://3.81.8.209:5173"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
   allowedHeaders: [
