@@ -36,6 +36,12 @@ const Result = () => {
         };
 
         fetchData();
+
+        const intervalId = setInterval(() => {
+            fetchData();
+        }, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     function createData(record) {
