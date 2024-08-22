@@ -8,7 +8,7 @@ const efidf = (documentEntities) => {
         return acc;
     }, {});
 
-    // Calculate Entity Frequency (TF)
+    // Calculate Entity Frequency (EF)
     const entityFrequency = documentEntities.map(de => ({
         EntityID: de.EntityID,
         DocID: de.DocID,
@@ -39,7 +39,7 @@ const efidf = (documentEntities) => {
         const ef = entityFrequency.find(ef => ef.EntityID === de.EntityID && ef.DocID === de.DocID).EF;
         const idf = idfValues[de.EntityID];
         de.EF_IDF = ef * idf;
-        console.log(`EntityID: ${de.EntityID}, DocID: ${de.DocID}, EF: ${ef}, IDF: ${idf}, EF-IDF: ${de.EF_IDF}`);
+        //console.log(`EntityID: ${de.EntityID}, DocID: ${de.DocID}, EF: ${ef}, IDF: ${idf}, EF-IDF: ${de.EF_IDF}`);
     });
 
     return documentEntities;

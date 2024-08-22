@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,41 +9,40 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button'; // Import Button
 import NavBar from '../components/navbar';
+import axios from 'axios';
 
 const Result = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { state } = useLocation();
+    const { query } = state;
 
     const columns = [
         { id: 'id', label: 'ID', minWidth: 170 },
         { id: 'title', label: 'Title', minWidth: 100 },
     ];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-            const response = await fetch('http://3.81.8.209:2000/v1/result');
-                //const response = await fetch('http://localhost:2000/v1/result');
-                const data = await response.json();
+    const getData = () => {
+        setLoading(true);
+        axios.get('http://localhost:2000/v1/result')
+            .then(response => {
+                const data = response.data;
                 setData(data.map(createData));
-                setLoading(false); // Set loading to false after data is set
-            } catch (error) {
-                console.error("Error fetching content data:", error);
-                setLoading(false); // Set loading to false if there is an error
-            }
-        };
+                setLoading(false);
+            })
+            .catch(err => {
+                setLoading(false);
+                console.log(err);
+            });
+    };
 
-        fetchData();
-
-        const intervalId = setInterval(() => {
-            fetchData();
-        }, 1000);
-
-        return () => clearInterval(intervalId); // Cleanup the interval on component unmount
-    }, []);
+    useEffect(() => {
+        getData();
+    }, [query]);
 
     function createData(record) {
         return {
@@ -62,11 +61,23 @@ const Result = () => {
         setPage(0);
     };
 
+    // Add a function to handle the refresh button click
+    const handleRefresh = () => {
+        getData();
+    };
+
     return (
         <div style={{ position: 'absolute', top: '0px', left: '0px', right: '0px' }}>
             <NavBar />
-            <div className="if"><Link className="ifr" to="/search"><h1>Information Retrieval</h1></Link></div>
+            <div className="if">
+                <Link className="ifr" to="/search">
+                    <h1>Information Retrieval</h1>
+                </Link>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                <Button variant="contained" color="primary" onClick={handleRefresh} style={{ margin: '20px 0' }}>
+                    Refresh Data
+                </Button>
                 {loading ? (
                     <CircularProgress /> // Display loading spinner
                 ) : (
