@@ -53,7 +53,7 @@ const resultController = {
             ];
 
             const uniqueData = Array.from(
-                new Map(combinedData.map(doc => [String(doc.DocID || doc.Id), doc])).values()
+                new Map(combinedData.map(doc => [String(doc.DocID || doc.Id || doc.id), doc])).values()
             );
             return res.status(200).json(uniqueData);
 

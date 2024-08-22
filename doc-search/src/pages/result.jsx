@@ -47,9 +47,9 @@ const Result = () => {
 
     function createData(record) {
         return {
-            id: record.DocID || record.Id,
-            title: record.Title || record.DocName,
-            path: record.Path
+            id: record.DocID || record.Id || record.id,
+            title: record.Title || record.DocName || record.title,
+            path: record.Path || record.path
         };
     }
 
