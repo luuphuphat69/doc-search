@@ -28,8 +28,8 @@ const Result = () => {
 
     const getData = () => {
         setLoading(true);
-        axios.get('http://localhost:2000/v1/result')
-        //axios.get('http://3.81.8.209:2000/v1/result')
+        //axios.get('http://localhost:2000/v1/result')
+        axios.get('http://3.81.8.209:2000/v1/result')
             .then(response => {
                 const data = response.data;
                 setData(data.map(createData));
