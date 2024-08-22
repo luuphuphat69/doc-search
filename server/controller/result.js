@@ -13,9 +13,11 @@ const resultController = {
             const queryString = JSON.stringify(wsQuery);
             const queryObject = JSON.parse(queryString);
             const query = queryObject.GetQueryResult;
-            const retrievedDocsMetadata = await Metadata.find({
-                metadata: { $regex: query, $options: 'i' } // Case-insensitive search
-            });
+            const metadataList = await Metadata.find({});
+            const retrievedDocsMetadata = metadataList.filter(p => query.includes(p.metadata.toString()));
+            // const retrievedDocsMetadata = await Metadata.find({
+            //     metadata: { $regex: query, $options: 'i' } // Case-insensitive search
+            // });
             const flattenRetrievedMetadataDocs = flattenMetadataDocs(retrievedDocsMetadata);
 
             // Finding docs by entities
