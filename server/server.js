@@ -11,6 +11,7 @@ const PORT = 2000;
 const calEFIDF = require('./func/cal_efidf');
 const getlistDE = require('./func/getlistDE');
 const updateEFIDFToDB = require('./func/updateEFIDFToDB');
+const path = require('path');
 
 dotenv.config();
 
@@ -69,4 +70,11 @@ app.post('/taskcomplete', async (req, res) => {
     console.error('Error updating EFIDF:', error);
     return res.status(500).send('An error occurred while processing the request');
   }
+});
+
+// Serve the React app
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
