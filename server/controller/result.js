@@ -1,18 +1,15 @@
-const GetParsedEntitiesFromQuery = require('../services/getparsedentities');
-const GetQuery = require('../services/getquery');
 const Metadata = require('../model/Metadata');
 const DE = require('../model/DE');
 const Entity = require('../model/Entity');
 const Document = require('../model/Document');
+const parsingQuery = require('../func/parsing_query');
 
 const resultController = {
     result: async (req, res) => {
         try {
             // Finding docs by metadata
-            const wsQuery = await GetQuery();
-            const queryString = JSON.stringify(wsQuery);
-            const queryObject = JSON.parse(queryString);
-            const query = queryObject.GetQueryResult;
+
+            const query = req.query.queries;
             const metadataList = await Metadata.find({});
             const retrievedDocsMetadata = metadataList.filter(p => query.includes(p.metadata.toString()));
             // const retrievedDocsMetadata = await Metadata.find({
@@ -21,10 +18,11 @@ const resultController = {
             const flattenRetrievedMetadataDocs = flattenMetadataDocs(retrievedDocsMetadata);
 
             // Finding docs by entities
-            const listEntities = await GetParsedEntitiesFromQuery();
+            const listEntities = await parsingQuery(query);
             let retrievedDocsEntity = [];
             if (listEntities && listEntities.length > 0) {
                 for (const entity of listEntities) {
+                    console.log(`Entity: ${entity}`);
                     // Find the entity in the Entity collection
                     const entityRecord = await Entity.findOne({
                         EntityName: { $regex: `^${entity}$`, $options: 'i' }
@@ -44,6 +42,7 @@ const resultController = {
                             }
                         }
                     }
+                    console.log(retrievedDocsEntity);
                 }
             } else {
                 console.log("No data retrieved from NLPE.");

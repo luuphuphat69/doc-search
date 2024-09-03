@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import NavBar from "../components/navbar";
-import axios from 'axios';
 
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,9 +9,6 @@ const Search = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            // Perform the search operation
-            await axios.get(`http://3.81.8.209:2000/v1/search?queries=${searchTerm}`);
-            //await axios.get(`http://localhost:2000/v1/search?queries=${searchTerm}`);
             // Navigate to results page
             navigate("/result", {state: {query: searchTerm}});
         } catch (error) {

@@ -3,17 +3,13 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
-const searchRoute = require('./router/search_router');
 const resultRoute = require('./router/result_router');
-const usageRoute = require('./router/usage_router');
 const PORT = 2000;
 const calEFIDF = require('./func/cal_efidf');
 const getlistDE = require('./func/getlistDE');
 const updateEFIDFToDB = require('./func/updateEFIDFToDB');
 const path = require('path');
-
-dotenv.config();
+const config = require('./config/config');
 
 const corsOptions = {
   origin: ["http://localhost:5173", "http://3.81.8.209:5173"],
@@ -36,12 +32,10 @@ app.use(express.json({ limit: "50mb" })); // Use express.json() instead of bodyP
 app.use(morgan("common"));
 
 // Define routes
-app.use('/v1', searchRoute);
 app.use('/v1', resultRoute);
-app.use('/v1/usage', usageRoute);
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGO_DATABASE;
+const mongoURI = config.db;
 (async () => {
   try {
     await mongoose.connect(mongoURI);
@@ -70,11 +64,4 @@ app.post('/taskcomplete', async (req, res) => {
     console.error('Error updating EFIDF:', error);
     return res.status(500).send('An error occurred while processing the request');
   }
-});
-
-// Serve the React app
-app.use(express.static(path.join(__dirname, 'dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
