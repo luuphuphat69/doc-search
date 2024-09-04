@@ -8,7 +8,6 @@ const PORT = 2000;
 const calEFIDF = require('./func/cal_efidf');
 const getlistDE = require('./func/getlistDE');
 const updateEFIDFToDB = require('./func/updateEFIDFToDB');
-const path = require('path');
 const config = require('./config/config');
 
 const corsOptions = {
